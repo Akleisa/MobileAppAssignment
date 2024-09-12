@@ -6,9 +6,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.app2.R
-import com.example.app2.network.AuthRepository
-import com.example.app2.network.LoginResponse
+import com.example.assessment2.R
+import com.example.assessment2.network.AuthRepository
+import com.example.assessment2.network.LoginResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

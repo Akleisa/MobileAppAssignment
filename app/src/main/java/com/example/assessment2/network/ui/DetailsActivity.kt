@@ -3,8 +3,8 @@ package com.example.app2.ui
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.app2.R
-import com.example.app2.network.Plant
+import com.example.assessment2.R
+import com.example.assessment2.network.Plant
 
 class DetailsActivity : AppCompatActivity() {
 

@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.app2.R
-import com.example.app2.network.Plant
+import com.example.assessment2.R
+import com.example.assessment2.network.Plant
 
 class PlantAdapter(
     private val plantList: List<Plant>,
