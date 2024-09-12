@@ -1,4 +1,4 @@
-package com.example.app2.ui
+package com.example.assessment2.ui
 
 import android.os.Bundle
 import android.widget.TextView

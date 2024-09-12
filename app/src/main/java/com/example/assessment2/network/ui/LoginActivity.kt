@@ -1,4 +1,4 @@
-package com.example.app2.ui
+package com.example.assessment2.ui
 
 import android.content.Intent
 import android.os.Bundle
