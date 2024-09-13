@@ -4,20 +4,21 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.assessment2.R
-import com.example.assessment2.network.AuthRepository
-import com.example.assessment2.network.DashboardResponse
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.assessment2.data.Entity
+import com.example.assessment2.network.RetrofitInstance
+import com.example.assessment2.repository.DashboardRepository
+import com.example.assessment2.viewmodel.DashboardViewModel
+import com.example.assessment2.viewmodel.DashboardViewModelFactory
 
 class DashboardActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var plantAdapter: PlantAdapter
-    private lateinit var authRepository: AuthRepository
+    private lateinit var entityAdapter: EntityAdapter
+    private lateinit var dashboardViewModel: DashboardViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,14 +28,21 @@ class DashboardActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Initialize repository
-        authRepository = AuthRepository()
+        // Initialize adapter and set it to RecyclerView
+        entityAdapter = EntityAdapter(emptyList()) { entity -> onEntityClick(entity) }
+        recyclerView.adapter = entityAdapter
+
+        // Initialize Repository and ViewModel using the Factory
+        val apiService = RetrofitInstance.apiService
+        val dashboardRepository = DashboardRepository(apiService)
+        val factory = DashboardViewModelFactory(dashboardRepository)
+        dashboardViewModel = ViewModelProvider(this, factory).get(DashboardViewModel::class.java)
 
         // Get keypass from intent
-        val keypass = intent.getStringExtra("KEYPASS")
+        val keypass = intent.getStringExtra("keypass")
 
+        // Fetch and observe dashboard data
         if (keypass != null) {
-            // Fetch dashboard data
             fetchDashboardData(keypass)
         } else {
             Toast.makeText(this, "Error: Keypass missing", Toast.LENGTH_SHORT).show()
@@ -42,28 +50,23 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     private fun fetchDashboardData(keypass: String) {
-        authRepository.getDashboardData(keypass).enqueue(object : Callback<DashboardResponse> {
-            override fun onResponse(call: Call<DashboardResponse>, response: Response<DashboardResponse>) {
-                if (response.isSuccessful && response.body() != null) {
-                    val dashboardResponse = response.body()!!
-                    val plants = dashboardResponse.entities  // Access 'entities', which is the list of plants
+        dashboardViewModel.getDashboardData(keypass)
 
-                    // Set up the adapter
-                    plantAdapter = PlantAdapter(plants) { plant ->
-                        // Handle item click - navigate to DetailsActivity
-                        val intent = Intent(this@DashboardActivity, DetailsActivity::class.java)
-                        intent.putExtra("PLANT", plant)
-                        startActivity(intent)
-                    }
-                    recyclerView.adapter = plantAdapter
-                } else {
-                    Toast.makeText(this@DashboardActivity, "Failed to load data", Toast.LENGTH_SHORT).show()
-                }
+        // Observe the dashboard data from ViewModel
+        dashboardViewModel.dashboardData.observe(this) { dashboardResponse ->
+            if (dashboardResponse != null) {
+                // Update the adapter with the new data
+                entityAdapter.updateList(dashboardResponse.entities)
+            } else {
+                // Show an error message if data loading failed
+                Toast.makeText(this, "Failed to load data", Toast.LENGTH_SHORT).show()
             }
+        }
+    }
 
-            override fun onFailure(call: Call<DashboardResponse>, t: Throwable) {
-                Toast.makeText(this@DashboardActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
-            }
-        })
+    private fun onEntityClick(entity: Entity) {
+        val intent = Intent(this, DetailsActivity::class.java)
+        intent.putExtra("selectedEntity", entity)  // Pass the Parcelable entity
+        startActivity(intent)
     }
 }
