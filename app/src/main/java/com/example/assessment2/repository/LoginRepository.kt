@@ -2,8 +2,11 @@ package com.example.assessment2.repository
 
 import com.example.assessment2.data.LoginRequest
 import com.example.assessment2.network.ApiService
+import javax.inject.Inject
 
-class LoginRepository(private val apiService: ApiService) {
+class LoginRepository @Inject constructor(
+    private val apiService: ApiService
+) {
 
     // Function to perform login API call
     suspend fun login(username: String, password: String) =

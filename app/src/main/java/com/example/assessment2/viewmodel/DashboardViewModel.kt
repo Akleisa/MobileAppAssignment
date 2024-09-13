@@ -1,13 +1,16 @@
-package com.example.assessment2.viewmodel
-
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.assessment2.data.DashboardResponse
 import com.example.assessment2.repository.DashboardRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class DashboardViewModel(private val dashboardRepository: DashboardRepository) : ViewModel() {
+@HiltViewModel
+class DashboardViewModel @Inject constructor(
+    private val dashboardRepository: DashboardRepository
+) : ViewModel() {
 
     // LiveData to observe dashboard data
     val dashboardData: MutableLiveData<DashboardResponse?> = MutableLiveData()
@@ -28,4 +31,3 @@ class DashboardViewModel(private val dashboardRepository: DashboardRepository) :
         }
     }
 }
-
