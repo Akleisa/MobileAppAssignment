@@ -17,7 +17,8 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        // Use Hilt's test runner for instrumentation tests
+        testInstrumentationRunner = "com.google.dagger.hilt.android.testing.HiltTestRunner"
     }
 
     buildTypes {
@@ -46,29 +47,32 @@ dependencies {
     implementation("com.squareup.moshi:moshi-kotlin:1.14.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
 
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
-    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
+    // Android architecture components
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
 
     // Hilt dependencies
     implementation("com.google.dagger:hilt-android:2.51.1")
+    implementation(libs.junit.junit)
     kapt("com.google.dagger:hilt-android-compiler:2.51.1")
 
-    // Test dependencies
     // Local unit test dependencies (run on the JVM)
-    testImplementation("io.mockk:mockk:1.13.12") // Core MockK library for local unit tests
-    testImplementation("io.mockk:mockk-android:1.13.12") // Android-specific MockK for local unit tests
-    testImplementation("io.mockk:mockk-agent:1.13.12") // MockK agent for advanced mocking (e.g., static methods)
-    androidTestImplementation(libs.androidx.junit) // JUnit for local unit tests
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("io.mockk:mockk:1.13.12")
+    testImplementation("io.mockk:mockk-agent:1.13.12")
 
-    // Instrumented test dependencies (run on an Android device or emulator) androidTestImplementation("io.mockk:mockk-android:1.13.12") // Android-specific MockK for instrumented tests
-    androidTestImplementation("io.mockk:mockk-agent:1.13.12") // MockK agent for advanced mocking in instrumented tests
-    androidTestImplementation("androidx.test.ext:junit:1.1.3") // AndroidX JUnit for instrumented tests
+    // Instrumented test dependencies (run on an Android device or emulator)
+    androidTestImplementation("androidx.test.ext:junit:1.1.5") // Updated to latest version
+    androidTestImplementation("io.mockk:mockk-android:1.13.12")
 
+    // AndroidX and Material dependencies
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+
+    // JUnit and Espresso for testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
