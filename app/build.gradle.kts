@@ -53,16 +53,19 @@ dependencies {
 
     // Hilt dependencies
     implementation("com.google.dagger:hilt-android:2.51.1")
-    implementation(libs.junit.junit)
     kapt("com.google.dagger:hilt-android-compiler:2.51.1")
 
     // Local unit test dependencies (run on the JVM)
     testImplementation("junit:junit:4.13.2")
     testImplementation("io.mockk:mockk:1.13.12")
-    testImplementation("io.mockk:mockk-agent:1.13.12")
+    testImplementation ("androidx.arch.core:core-testing:2.1.0")
+
+
+    // Coroutines for unit test
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
 
     // Instrumented test dependencies (run on an Android device or emulator)
-    androidTestImplementation("androidx.test.ext:junit:1.1.5") // Updated to latest version
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("io.mockk:mockk-android:1.13.12")
 
     // AndroidX and Material dependencies
