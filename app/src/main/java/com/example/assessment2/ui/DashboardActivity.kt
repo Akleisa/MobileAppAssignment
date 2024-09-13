@@ -3,22 +3,23 @@ package com.example.assessment2.ui
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.assessment2.R
 import com.example.assessment2.data.Entity
-import com.example.assessment2.network.RetrofitInstance
-import com.example.assessment2.repository.DashboardRepository
 import com.example.assessment2.viewmodel.DashboardViewModel
-import com.example.assessment2.viewmodel.DashboardViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint  // Annotate with AndroidEntryPoint for Hilt injection
 class DashboardActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var entityAdapter: EntityAdapter
-    private lateinit var dashboardViewModel: DashboardViewModel
+
+    // Use Hilt to inject ViewModel without manually creating it
+    private val dashboardViewModel: DashboardViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,12 +33,6 @@ class DashboardActivity : AppCompatActivity() {
         entityAdapter = EntityAdapter(emptyList()) { entity -> onEntityClick(entity) }
         recyclerView.adapter = entityAdapter
 
-        // Initialize Repository and ViewModel using the Factory
-        val apiService = RetrofitInstance.apiService
-        val dashboardRepository = DashboardRepository(apiService)
-        val factory = DashboardViewModelFactory(dashboardRepository)
-        dashboardViewModel = ViewModelProvider(this, factory).get(DashboardViewModel::class.java)
-
         // Get keypass from intent
         val keypass = intent.getStringExtra("keypass")
 
@@ -50,6 +45,7 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     private fun fetchDashboardData(keypass: String) {
+        // Fetch data from ViewModel
         dashboardViewModel.getDashboardData(keypass)
 
         // Observe the dashboard data from ViewModel

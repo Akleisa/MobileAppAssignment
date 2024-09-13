@@ -3,35 +3,24 @@ package com.example.assessment2.ui
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.example.assessment2.R
-import com.example.assessment2.network.ApiService
-import com.example.assessment2.network.RetrofitInstance
-import com.example.assessment2.repository.LoginRepository
 import com.example.assessment2.viewmodel.LoginViewModel
-import com.example.assessment2.viewmodel.LoginViewModelFactory
 import android.widget.Button
 import android.widget.EditText
 import android.content.Intent
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var loginViewModel: LoginViewModel
+    // Hilt will inject the LoginViewModel
+    private val loginViewModel: LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
-        // Initialize the API service
-        val apiService: ApiService = RetrofitInstance.apiService
-
-        // Initialize the repository and factory
-        val loginRepository = LoginRepository(apiService) // Pass the ApiService instance to the repository
-        val factory = LoginViewModelFactory(loginRepository)
-
-        // Use ViewModelProvider with factory to initialize loginViewModel
-        loginViewModel = ViewModelProvider(this, factory).get(LoginViewModel::class.java)
 
         // Fetch input fields from layout
         val usernameEditText = findViewById<EditText>(R.id.et_username)

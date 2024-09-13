@@ -5,7 +5,9 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.assessment2.R
 import com.example.assessment2.data.Entity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
