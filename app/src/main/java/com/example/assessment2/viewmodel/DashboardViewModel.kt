@@ -1,3 +1,6 @@
+package com.example.assessment2.viewmodel
+
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,7 +16,8 @@ class DashboardViewModel @Inject constructor(
 ) : ViewModel() {
 
     // LiveData to observe dashboard data
-    val dashboardData: MutableLiveData<DashboardResponse?> = MutableLiveData()
+    private val _dashboardData = MutableLiveData<DashboardResponse?>()
+    val dashboardData: LiveData<DashboardResponse?> get() = _dashboardData
 
     // Function to fetch dashboard data using the keypass
     fun getDashboardData(keypass: String) {
@@ -21,12 +25,12 @@ class DashboardViewModel @Inject constructor(
             try {
                 val response = dashboardRepository.getDashboardData(keypass)
                 if (response.isSuccessful) {
-                    dashboardData.postValue(response.body())
+                    _dashboardData.postValue(response.body())
                 } else {
-                    dashboardData.postValue(null)  // Handle failure by posting null
+                    _dashboardData.postValue(null)  // Handle failure by posting null
                 }
             } catch (e: Exception) {
-                dashboardData.postValue(null)  // Post null on failure
+                _dashboardData.postValue(null)  // Post null on failure
             }
         }
     }

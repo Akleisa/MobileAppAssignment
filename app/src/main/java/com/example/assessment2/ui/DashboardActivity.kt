@@ -12,6 +12,7 @@ import com.example.assessment2.data.Entity
 import com.example.assessment2.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint  // Annotate with AndroidEntryPoint for Hilt injection
 class DashboardActivity : AppCompatActivity() {
 
