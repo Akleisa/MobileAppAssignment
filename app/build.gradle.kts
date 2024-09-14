@@ -40,8 +40,7 @@ android {
 }
 
 dependencies {
-
-    // Retrofit dependencies
+// Retrofit dependencies
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.retrofit2:converter-moshi:2.11.0")
     implementation("com.squareup.moshi:moshi-kotlin:1.14.0")
@@ -58,11 +57,13 @@ dependencies {
     // Local unit test dependencies (run on the JVM)
     testImplementation("junit:junit:4.13.2")
     testImplementation("io.mockk:mockk:1.13.12")
-    testImplementation ("androidx.arch.core:core-testing:2.1.0")
 
+    // Add Kotlin test dependency
+    testImplementation("org.jetbrains.kotlin:kotlin-test:1.8.0")
 
     // Coroutines for unit test
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+    testImplementation("androidx.arch.core:core-testing:2.1.0")
 
     // Instrumented test dependencies (run on an Android device or emulator)
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
@@ -75,8 +76,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
-    // JUnit and Espresso for testing
-    testImplementation(libs.junit)
+    // Instrumented test dependencies (JUnit and Espresso for UI testing)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
