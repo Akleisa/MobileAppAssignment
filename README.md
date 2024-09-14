@@ -4,8 +4,8 @@ This project is an Android application developed as part of the NIT3213 Final As
 
 ## Features
 - **User Authentication:** Users can log in using the provided API. The app verifies user credentials and retrieves a `keypass` for further requests.
-- **Dashboard Display:** After successful login, the app displays a list of entities on the Dashboard, which are fetched from the API using the `keypass`.
-- **Details Screen:** On selecting an item from the Dashboard, the app displays detailed information about the selected entity on the Details screen.
+- **Dashboard Display:** After successful login, the app displays a list of plants, fetched from the API using the `keypass`. Each item displays the plant's scientific name, common name, care level, and light requirement.
+- **Details Screen:** On selecting an item from the Dashboard, the app displays detailed information about the selected plant, including a description.
 
 ## Prerequisites
 
