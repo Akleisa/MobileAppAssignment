@@ -31,18 +31,18 @@ This app interacts with the vu-nit3213-api for user authentication and data retr
 ### Login:
 - URL: https://vu-nit3213-api.onrender.com/ort/auth
 - Method: POST
-Request Body:
+- Request Body:
 {
   "username": "Eliza",
   "password": "s4578856"
 }
-Response: Returns a keypass to use in further requests, such as retrieving plant data.
+- Response: Returns a keypass to use in further requests, such as retrieving plant data.
 
 ### Dashboard
 
 - URL: https://vu-nit3213-api.onrender.com/dashboard/{keypass}
 - Method: GET
-Response: Provides a list of plant entities with properties such as scientific name, common name, care level, light requirements, and descriptions.
+- Response: Provides a list of plant entities with properties such as scientific name, common name, care level, light requirements, and descriptions.
 
 ## Running the Application
 
