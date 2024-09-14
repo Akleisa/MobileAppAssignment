@@ -44,18 +44,6 @@ This app interacts with the vu-nit3213-api for user authentication and data retr
 - Method: GET
 - Response: Provides a list of plant entities with properties such as scientific name, common name, care level, light requirements, and descriptions.
 
-## Details Screen
-
-When a user selects an entity (plant) from the Dashboard, they are taken to the Details screen. This screen displays all relevant information about the selected plant, including:
-
-- **Scientific Name**: The botanical name of the plant.
-- **Common Name**: The everyday name of the plant.
-- **Care Level**: The level of difficulty to care for the plant.
-- **Light Requirement**: The amount of light needed for the plant to thrive.
-- **Description**: A detailed description of the plant, including its appearance and characteristics.
-
-This information is retrieved from the API and passed to the Details screen when a user selects a plant from the Dashboard.
-
 ## Running the Application
 
 1. Open Android Studio and ensure the project is fully loaded.
