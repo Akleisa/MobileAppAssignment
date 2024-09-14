@@ -21,7 +21,7 @@ object RetrofitInstance {
         .addInterceptor(logging)
         .build()
 
-    // Moshi instance for JSON serialization
+    // Moshi instance for JSON serialisation
     private val moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
         .build()

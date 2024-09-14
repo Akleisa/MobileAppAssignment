@@ -26,11 +26,11 @@ class DashboardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
 
-        // Initialize RecyclerView
+        // Initialise RecyclerView
         recyclerView = findViewById(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Initialize adapter and set it to RecyclerView
+        // Initialise adapter and set it to RecyclerView
         entityAdapter = EntityAdapter(emptyList()) { entity -> onEntityClick(entity) }
         recyclerView.adapter = entityAdapter
 

@@ -17,7 +17,7 @@ class DetailsActivity : AppCompatActivity() {
         // Get the selected entity from the intent
         val selectedEntity = intent.getParcelableExtra<Entity>("selectedEntity")
 
-        // Initialize the views
+        // Initialise the views
         val tvScientificName = findViewById<TextView>(R.id.tv_scientific_name)
         val tvCommonName = findViewById<TextView>(R.id.tv_common_name)
         val tvCareLevel = findViewById<TextView>(R.id.tv_care_level)

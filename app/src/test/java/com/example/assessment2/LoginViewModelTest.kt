@@ -26,17 +26,17 @@ class LoginViewModelTest {
     // Declare testDispatcher and loginRepository
     private val testDispatcher = StandardTestDispatcher()
     private lateinit var loginViewModel: LoginViewModel
-    private lateinit var loginRepository: LoginRepository // You need this
+    private lateinit var loginRepository: LoginRepository
     private val loginResultObserver: Observer<LoginResponse?> = mockk(relaxed = true)
 
     @Before
     fun setUp() {
         Dispatchers.setMain(testDispatcher)
 
-        // Initialize the loginRepository here
+        // Initialise the loginRepository here
         loginRepository = mockk(relaxed = true)
 
-        // Initialize the ViewModel with the loginRepository
+        // Initialise the ViewModel with the loginRepository
         loginViewModel = LoginViewModel(loginRepository)
 
         // Observe changes in the login result
